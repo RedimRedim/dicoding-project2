@@ -26,16 +26,17 @@ function bookFormSubmitListeners() {
 }
 
 function deleteButtonListeners() {
-  const deleteButton = document.querySelectorAll(
-    '[data-testid="bookItemDeleteButton"]'
-  );
-  deleteButton.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      let bookId = event.target.closest("[data-bookid]").dataset.bookid;
-      BookClass.deleteBook(bookId);
+  document
+    .querySelectorAll('[data-testid="bookItemDeleteButton"]')
+    .forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const bookId = parseInt(
+          button.parentElement.parentElement.dataset.bookid
+        );
+        console.log(bookId, index);
+        //BookClass.deleteBook(bookId);
+      });
     });
-  });
-  //listen deleteListener function
 }
 
 //BUTTON WHEN PRESSED COMPLETED AND HAVENT COMPLETED
