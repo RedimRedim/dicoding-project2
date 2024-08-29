@@ -1,7 +1,10 @@
 import { STORAGE_KEY, parseStorageKey } from "./key.js";
 
 export class Book {
-  static saveBook(bookData) {
+  constructor() {
+    this.books = parseStorageKey || [];
+  }
+  saveBook(bookData) {
     let booksArray = [];
 
     if (
@@ -11,15 +14,15 @@ export class Book {
       // Create storage if not yet existing
       booksArray = [];
     } else {
-      booksArray = parseStorageKey;
+      booksArray = this.books;
     }
 
     booksArray.push(bookData);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
   }
 
-  static generateBooks() {
-    const allBooks = parseStorageKey;
+  generateBooks() {
+    const allBooks = this.books;
     if (allBooks) {
       let completedBooks = [];
       let pendingBooks = [];
@@ -49,9 +52,8 @@ export class Book {
   addBookHtml(completedBooks, pendingBooks) {
     const completedBooksElement = document.getElementById("completeBookList");
     const pendingBooksElement = document.getElementById("incompleteBookList");
-    pendingBooksElement.innerHTML = pendingBooks;
-
-    completedBooksElement.innerHTML = completedBooks;
+    pendingBooksElement.innerHTML = pendingBooks.join("");
+    completedBooksElement.innerHTML = completedBooks.join("");
   }
 
   static getBook() {
@@ -70,13 +72,21 @@ export class Book {
 
     return book;
   }
+
+  deleteBook(bookid) {
+    this.books = this.books.filter((book) => {
+      return book.id != bookid;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    this.generateBooks();
+  }
 }
 
 //UPDATE
 //DELETE
 //MODIFY
 // deleteBook(bookId) {
-//     const booksArray = parseStorageKey;
+//     const booksArray = this.books;
 //     booksArray.forEach((book, index) => {
 //       if (book.id === bookId) {
 //         booksArray.splice(index, 1);

@@ -1,35 +1,42 @@
 import { STORAGE_KEY, parseStorageKey } from "./key.js";
 import { Book } from "./test.js";
-
-const bookFormSumitButton = document.getElementById("bookFormSubmit");
-const bookData = Book.getBook();
-Book.saveBook(bookData);
-Book.generateBooks();
-
+const BookClass = new Book();
 
 document.addEventListener("DOMContentLoaded", () => {
-  Book.generateBooks();
+  BookClass.generateBooks();
+  setupListeners();
 });
 
-bookFormSumitButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const bookData = Book.getBook();
-  Book.saveBook(bookData);
-  Book.generateBooks();
-});
+function setupListeners() {
+  // Listen for form submission
+  bookFormSubmitListeners();
 
-const incompleteBookList = document.getElementById("incompleteBookList");
+  // Listen for delete button clicks
+  deleteButtonListeners();
+}
 
-incompleteBookList.addEventListener("click", (event) => {
-  const eventBtn = event.target.getAttribute("data-testid");
+function bookFormSubmitListeners() {
+  const bookFormSumitButton = document.getElementById("bookFormSubmit");
+  bookFormSumitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const bookData = Book.getBook();
+    BookClass.saveBook(bookData);
+    BookClass.generateBooks();
+  });
+}
 
-  if (eventBtn === "bookItemDeleteButton") {
-    const bookItem = event.target.closest("[data-bookid]");
-    const bookId = bookItem.getAttribute("data-bookid");
-    Book.deleteBook(bookId);
-    book.generateBooks();
-  }
-});
+function deleteButtonListeners() {
+  const deleteButton = document.querySelectorAll(
+    '[data-testid="bookItemDeleteButton"]'
+  );
+  deleteButton.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      let bookId = event.target.closest("[data-bookid]").dataset.bookid;
+      BookClass.deleteBook(bookId);
+    });
+  });
+  //listen deleteListener function
+}
 
 //BUTTON WHEN PRESSED COMPLETED AND HAVENT COMPLETED
 // CHANGE THE STATUS OF ISCOMPLETE IN LOCALSTORAGE
