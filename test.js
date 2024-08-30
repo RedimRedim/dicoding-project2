@@ -2,7 +2,7 @@ import { STORAGE_KEY, parseStorageKey } from "./key.js";
 
 export class Book {
   constructor() {
-    this.books = parseStorageKey || [];
+    this.books = parseStorageKey() || []; //getData from local storage
   }
   saveBook(bookData) {
     let booksArray = [];
@@ -22,15 +22,17 @@ export class Book {
   }
 
   generateBooks() {
-    const allBooks = this.books;
+    const allBooks = parseStorageKey();
     if (allBooks) {
       let completedBooks = [];
       let pendingBooks = [];
       allBooks.forEach((book) => {
         let divBook = `<div data-bookid="${book.id}" data-testid="bookItem">
-                  <h3 data-testid="bookItemTitle">${book.title}</h3>
-                 <p data-testid="bookItemAuthor">Penulis: ${book.author}</p>
-                 <p data-testid="bookItemYear">Tahun: ${book.year}</p>
+                  <h3 data-testid="bookItemTitle">${book.title}
+                  </h3>
+                  
+                 <p data-testid="bookItemAuthor">${book.author}</p>
+                 <p data-testid="bookItemYear">${book.year}</p>
                  <div>
                     <button data-testid="bookItemIsCompleteButton">${
                       book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
@@ -73,24 +75,36 @@ export class Book {
     return book;
   }
 
-  deleteBook(bookid) {
+  deleteBook(bookId) {
     this.books = this.books.filter((book) => {
-      return book.id != bookid;
+      return book.id != bookId;
     });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
     this.generateBooks();
   }
-}
 
-//UPDATE
-//DELETE
-//MODIFY
-// deleteBook(bookId) {
-//     const booksArray = this.books;
-//     booksArray.forEach((book, index) => {
-//       if (book.id === bookId) {
-//         booksArray.splice(index, 1);
-//       }
-//     });
-//     localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
-//   }
+  moveBook(bookId) {
+    this.books = this.books.map((book) => {
+      if (book.id == bookId) {
+        return { ...book, isCompleted: !book.isCompleted }; //this one we wanna return book while reverse the isCompleted property
+      }
+      return book;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    this.generateBooks();
+  }
+
+
+
+  updateBook(bookId, title, author, year, isCompleted) {
+    console.log(bookId, title, author, year, isCompleted);
+    // const bookData = {
+    //   id: bookId,
+    //   title: title,
+    //   author: author,
+    //   year: parseInt(year),
+    //   isCompleted: false, // default to false when updating book
+    // };
+    //console.log(bookData);
+  }
+}

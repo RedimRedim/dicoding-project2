@@ -1,44 +1,32 @@
-import { STORAGE_KEY, parseStorageKey } from "./key.js";
+import { STORAGE_KEY, parseStorageKey, ModalHandling } from "./key.js";
 import { Book } from "./test.js";
 const BookClass = new Book();
+const ModalHandlingClass = new ModalHandling();
 
 document.addEventListener("DOMContentLoaded", () => {
   BookClass.generateBooks();
-  setupListeners();
 });
 
-function setupListeners() {
-  // Listen for form submission
-  bookFormSubmitListeners();
-
-  // Listen for delete button clicks
-  deleteButtonListeners();
-}
-
-function bookFormSubmitListeners() {
-  const bookFormSumitButton = document.getElementById("bookFormSubmit");
-  bookFormSumitButton.addEventListener("click", (event) => {
+//CRUD CLICK HANDLING
+document.addEventListener("click", (event) => {
+  const bookId = parseInt(
+    event.target.parentElement.parentElement.dataset.bookid
+  );
+  if (event.target.matches('[data-testid="bookFormSubmitButton"]')) {
+    //TODO ADDING BOOK SITE
     event.preventDefault();
     const bookData = Book.getBook();
     BookClass.saveBook(bookData);
-    BookClass.generateBooks();
-  });
-}
-
-function deleteButtonListeners() {
-  document
-    .querySelectorAll('[data-testid="bookItemDeleteButton"]')
-    .forEach((button, index) => {
-      button.addEventListener("click", () => {
-        const bookId = parseInt(
-          button.parentElement.parentElement.dataset.bookid
-        );
-        console.log(bookId, index);
-        //BookClass.deleteBook(bookId);
-      });
-    });
-}
-
-//BUTTON WHEN PRESSED COMPLETED AND HAVENT COMPLETED
-// CHANGE THE STATUS OF ISCOMPLETE IN LOCALSTORAGE
-// UPDATE THE DIV ELEMENT AND RE-SHOWING IN HTML
+  } else if (event.target.matches('[data-testid="bookItemDeleteButton"]')) {
+    //TODO DELETE BOOK SITE
+    console.log(bookId);
+    BookClass.deleteBook(bookId);
+  } else if (event.target.matches('[data-testid="bookItemIsCompleteButton"]')) {
+    //TODO MOVE BOOK SITE
+    BookClass.moveBook(bookId);
+  } else if (event.target.matches('[data-testid="bookItemEditButton"]')) {
+    ModalHandlingClass.modalBookData(event);
+    //modalSubmitListener(myModal, bookId); //UPDATE the latest title
+  }
+  BookClass.generateBooks();
+});

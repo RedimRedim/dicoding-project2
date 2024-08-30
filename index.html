@@ -1,86 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bookshelf App</title>
 
-    <!-- Impor script kamu di sini -->
-    <script defer type="module" src="key.js"></script>
-    <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
-    <script defer type="module"src="test.js"> </script>
-    <script defer type="module" src="main.js"></script>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookshelf App</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-  </head>
-  <body>
-    <header>
-      <h1>Bookshelf App</h1>
-    </header>
 
-    <main>
-      <section>
-        <h2>Tambah Buku Baru</h2>
-        <form id="bookForm" data-testid="bookForm">
-          <div>
-            <label for="bookFormTitle">Judul</label>
-            <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
-          </div>
-          <div>
-            <label for="bookFormAuthor">Penulis</label>
-            <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
-          </div>
-          <div>
-            <label for="bookFormYear">Tahun</label>
-            <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
-          </div>
-          <div>
-            <label for="bookFormIsComplete">Selesai dibaca</label>
-            <input
-              id="bookFormIsComplete"
-              type="checkbox"
-              data-testid="bookFormIsCompleteCheckbox"
-            />
-          </div>
-          <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
-            Masukkan Buku ke rak <span>Belum selesai dibaca</span>
-          </button>
-        </form>
-      </section>
+</head>
 
-      <section>
-        <h2>Cari Buku</h2>
-        <form id="searchBook" data-testid="searchBookForm">
-          <label for="searchBookTitle">Judul</label>
-          <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
-          <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
-            Cari
-          </button>
-        </form>
-      </section>
+<body>
+  <header>
+    <h1>Bookshelf App</h1>
+  </header>
 
-      <section>
-        <h2>Belum selesai dibaca</h2>
 
-        <div id="incompleteBookList" data-testid="incompleteBookList">
-          <!-- 
+
+  <main>
+    <section>
+      <h2>Tambah Buku Baru</h2>
+      <form id="bookForm" data-testid="bookForm">
+        <div>
+          <label for="bookFormTitle">Judul</label>
+          <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
+        </div>
+        <div>
+          <label for="bookFormAuthor">Penulis</label>
+          <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
+        </div>
+        <div>
+          <label for="bookFormYear">Tahun</label>
+          <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
+        </div>
+        <div>
+          <label for="bookFormIsComplete">Selesai dibaca</label>
+          <input id="bookFormIsComplete" type="checkbox" data-testid="bookFormIsCompleteCheckbox" />
+        </div>
+        <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
+          Masukkan Buku ke rak <span>Belum selesai dibaca</span>
+        </button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Cari Buku</h2>
+      <form id="searchBook" data-testid="searchBookForm">
+        <label for="searchBookTitle">Judul</label>
+        <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
+        <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
+          Cari
+        </button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Belum selesai dibaca</h2>
+
+      <div id="incompleteBookList" data-testid="incompleteBookList">
+        <!-- 
             Ini adalah struktur HTML untuk masing-masing buku.
             Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
           -->
-        </div>
-      </section>
+      </div>
+    </section>
 
-      <section>
-        <h2>Selesai dibaca</h2>
+    <section>
+      <h2>Selesai dibaca</h2>
 
-        <div id="completeBookList" data-testid="completeBookList">
-          <!-- 
+      <div id="completeBookList" data-testid="completeBookList">
+        <!-- 
             Ini adalah struktur HTML untuk masing-masing buku.
             Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
           -->
-          
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for handling Edit Book -->
+  <div class="modal" tabindex="-1" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Book Name:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         </div>
-      </section>
-    </main>
-  </body>
+        <div class="modal-body">
+          <label for>Title</label>
+          <input type="text" id="changeTitle" placeholder="Enter new title name" autocomplete="off" required>
+          <br>
+          <label for>Author</label>
+          <input type="text" id="changeAuthor" placeholder="Enter new author name" autocomplete="off" required>
+          <br>
+          <label for>Year</label>
+          <input type="number" id="changeYear" placeholder="Enter new publication year" autocomplete="off" required>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true">
+            <label class="form-check-label" for="flexRadioDefault1">
+              True
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="false">
+            <label class="form-check-label" for="flexRadioDefault2">
+              False
+            </label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveBook">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script type="module" src="key.js"></script>
+  <script type="module" src="test.js"> </script>
+  <script type="module" src="main.js"></script>
+</body>
 
 </html>
