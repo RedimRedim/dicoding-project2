@@ -30,3 +30,13 @@ document.addEventListener("click", (event) => {
   }
   BookClass.generateBooks();
 });
+
+//LEARNING CUSTOM EVENT BY LISTEN WHEN BOOK IS BEING ADDED
+document.addEventListener("bookAdded", (event) => {
+  window.alert(`A new book was added:
+    ID: ${event.detail.bookId}
+    Title: ${event.detail.title}
+    Author: ${event.detail.author}
+    Year: ${event.detail.year}
+    Completed: ${event.detail.isCompleted}`);
+});

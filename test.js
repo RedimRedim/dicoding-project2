@@ -19,6 +19,17 @@ export class Book {
 
     booksArray.push(bookData);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
+
+    const bookAddedEvent = new CustomEvent("bookAdded", {
+      detail: {
+        bookId: bookData.id,
+        title: bookData.title,
+        author: bookData.author,
+        year: bookData.year,
+        isCompleted: bookData.isCompleted,
+      },
+    });
+    document.dispatchEvent(bookAddedEvent);
   }
 
   generateBooks() {
@@ -93,8 +104,6 @@ export class Book {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
     this.generateBooks();
   }
-
-
 
   updateBook(bookId, title, author, year, isCompleted) {
     console.log(bookId, title, author, year, isCompleted);
