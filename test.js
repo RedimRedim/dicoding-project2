@@ -43,9 +43,9 @@ export class Book {
       let completedBooks = [];
       let pendingBooks = [];
       allBooks.forEach((book) => {
-        let divBook = `<div data-bookid="${book.id}" data-testid="bookItem">
-                  <h3 data-testid="bookItemTitle">${book.title}
-                  </h3>
+        let divBook = `<div data-bookid="${book.id}" data-testid="bookItem" id="bookItemContent">
+                  <p data-testid="bookItemTitle">${book.title}
+                  </p>
                   
                  <p data-testid="bookItemAuthor">${book.author}</p>
                  <p data-testid="bookItemYear">${book.year}</p>

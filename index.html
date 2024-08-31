@@ -43,7 +43,7 @@
           <label for="bookFormIsComplete">Selesai dibaca</label>
           <input id="bookFormIsComplete" type="checkbox" data-testid="bookFormIsCompleteCheckbox" />
         </div>
-        <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton" class="btn btn-primary">
+        <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
           Masukkan Buku ke rak 
         </button>
       </form>
@@ -55,7 +55,7 @@
       <form id="searchBook" data-testid="searchBookForm">
         <label for="searchBookTitle">Judul</label>
         <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
-        <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton" class="btn btn-primary">
+        <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
           Cari
         </button>
       </form>
@@ -73,7 +73,7 @@
     </section>
 
     <section>
-      <h2>Selesai dibaca</h2>
+      <p class="sectionTitle">Selesai dibaca</p>
 
       <div id="completeBookList" data-testid="completeBookList">
         <!-- 
@@ -119,8 +119,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveBook">Save changes</button>
+          <button type="button" class="btn" data-dismiss="modal">Close</button>
+          <button type="button" class="btn" id="saveBook">Save changes</button>
         </div>
       </div>
     </div>
