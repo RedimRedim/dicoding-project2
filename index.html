@@ -20,12 +20,12 @@
 
 <body>
   <header>
-    <h1>Bookshelf App</h1>
+    <p class="sectionTitle">Bookshelf App</p>
   </header>
 
   <main>
     <section>
-      <p class="headTitle">Tambah Buku Baru</p>
+      <p class="sectionTitle">Tambah Buku Baru</p>
       <form id="bookForm" data-testid="bookForm">
         <div class="bookFormContent">
           <label for="bookFormTitle">Judul</label>
@@ -50,19 +50,19 @@
     </section>
 
     <section>
-      <p class="findBookTitle">Find Book</p>
+      <p class="sectionTitle">Find Book</p>
 
       <form id="searchBook" data-testid="searchBookForm">
         <label for="searchBookTitle">Judul</label>
         <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
-        <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
+        <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton" class="btn btn-primary">
           Cari
         </button>
       </form>
     </section>
 
     <section>
-      <h2>Belum selesai dibaca</h2>
+      <p class="sectionTitle">Pending Read</p>
 
       <div id="incompleteBookList" data-testid="incompleteBookList">
         <!-- 
@@ -90,7 +90,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Edit Book Name:</h5>
+          <h5 class="modal-title">Edit Book Name: <span class="modal-bookid"></span></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -104,17 +104,18 @@
           <input type="number" id="changeYear" placeholder="Enter new publication year" autocomplete="off" required>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true" >
             <label class="form-check-label" for="flexRadioDefault1">
-              True
+                Sudah dibaca
             </label>
-          </div>
-          <div class="form-check">
+        </div>
+        <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="false">
             <label class="form-check-label" for="flexRadioDefault2">
-              False
+                Belum dibaca
             </label>
-          </div>
+        </div>
+        
 
         </div>
         <div class="modal-footer">

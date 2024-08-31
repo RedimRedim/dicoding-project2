@@ -1,28 +1,35 @@
 
 @media screen and (max-width: 768px) {
 body{
-    background-color: rgb(77, 77, 77);
+    background-color: rgb(41, 41, 41);
     font-family: "Quicksand", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1em;
     padding: 0;
-    color:rgb(202, 201, 201);
+    color: #ffffff;
     margin : 0;
 }
 
 main{
     display:flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    align-items: center;
+    flex-grow:1;
+
 }
 
 section {
     padding: 1em;
+    background-color: #212121;
+    width: 92%;
+
 }
 
-.findBookTitle, .headTitle{
+.sectionTitle{
     text-align: center;
     font-size:1.5em;
-    color: rgb(245, 245, 237)
+    margin: 0 auto;
+    color: #ffffff
 }
 
 
@@ -30,20 +37,31 @@ section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid black;
+}
+
+#searchBook{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #bookForm .bookFormContent{
   display: flex;
   flex-direction: row;
-  gap: 5px;  
-  width:85%;
+  width:100%;
 }
 
 .bookFormContent label{
-    width: 150px;
+    width: 15%;
     margin: 0.5em;
 
+}
+
+.bookFormContent #bookFormTitle,
+.bookFormContent #bookFormAuthor,
+.bookFormContent #bookFormYear
+    {
+    flex-grow: 1;
 }
 
 label[for="bookFormIsComplete"] {
@@ -70,5 +88,14 @@ input{
     padding: 0.5em;
 }
 
+#incompleteBookList {
+    display:flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+#incompleteBookList div{
+    display: flex;
+    flex-wrap: wrap;
 }
 

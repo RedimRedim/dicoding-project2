@@ -4,36 +4,41 @@ export class Book {
   constructor() {
     this.books = parseStorageKey() || []; //getData from local storage
   }
+
   saveBook(bookData) {
-    let booksArray = [];
+    console.log(bookData);
+    if (bookData) {
+      let booksArray = [];
 
-    if (
-      localStorage.getItem(STORAGE_KEY) == null ||
-      localStorage.getItem(STORAGE_KEY) == undefined
-    ) {
-      // Create storage if not yet existing
-      booksArray = [];
-    } else {
-      booksArray = this.books;
+      if (
+        localStorage.getItem(STORAGE_KEY) == null ||
+        localStorage.getItem(STORAGE_KEY) == undefined
+      ) {
+        // Create storage if not yet existing
+        booksArray = [];
+      } else {
+        booksArray = this.books;
+      }
+
+      booksArray.push(bookData);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
+
+      const bookAddedEvent = new CustomEvent("bookAdded", {
+        detail: {
+          bookId: bookData.id,
+          title: bookData.title,
+          author: bookData.author,
+          year: bookData.year,
+          isCompleted: bookData.isCompleted,
+        },
+      });
+      document.dispatchEvent(bookAddedEvent);
     }
-
-    booksArray.push(bookData);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
-
-    const bookAddedEvent = new CustomEvent("bookAdded", {
-      detail: {
-        bookId: bookData.id,
-        title: bookData.title,
-        author: bookData.author,
-        year: bookData.year,
-        isCompleted: bookData.isCompleted,
-      },
-    });
-    document.dispatchEvent(bookAddedEvent);
   }
 
-  generateBooks() {
-    const allBooks = parseStorageKey();
+  generateBooks(filteredBooks) {
+    const allBooks = filteredBooks ? filteredBooks : parseStorageKey();
+
     if (allBooks) {
       let completedBooks = [];
       let pendingBooks = [];
@@ -69,21 +74,17 @@ export class Book {
     completedBooksElement.innerHTML = completedBooks.join("");
   }
 
-  static getBook() {
-    const bookFormTitle = document.getElementById("bookFormTitle");
-    const bookFormAuthor = document.getElementById("bookFormAuthor");
-    const bookFormYear = document.getElementById("bookFormYear");
-    const bookFormIsComplete = document.getElementById("bookFormIsComplete");
+  findBook(bookTitle) {
+    if (bookTitle) {
+      console.log(this.books);
+      const filteredBooks = this.books.filter((book) => {
+        return book.title.toLowerCase().includes(bookTitle.toLowerCase());
+      });
 
-    const book = {
-      id: new Date().getTime(),
-      title: bookFormTitle.value,
-      author: bookFormAuthor.value,
-      year: parseInt(bookFormYear.value),
-      isCompleted: bookFormIsComplete.checked,
-    };
-
-    return book;
+      this.generateBooks(filteredBooks);
+    } else {
+      this.generateBooks();
+    }
   }
 
   deleteBook(bookId) {
@@ -105,15 +106,40 @@ export class Book {
     this.generateBooks();
   }
 
-  updateBook(bookId, title, author, year, isCompleted) {
-    console.log(bookId, title, author, year, isCompleted);
-    // const bookData = {
-    //   id: bookId,
-    //   title: title,
-    //   author: author,
-    //   year: parseInt(year),
-    //   isCompleted: false, // default to false when updating book
-    // };
-    //console.log(bookData);
+  updateBook(updateBookData) {
+    this.books = this.books.map((book) => {
+      if (book.id == updateBookData.id) {
+        console.log(updateBookData);
+        return {
+          ...book,
+          id: updateBookData.id,
+          title: updateBookData.title,
+          author: updateBookData.author,
+          year: updateBookData.year,
+          isCompleted: updateBookData.isCompleted,
+        };
+      }
+      return book;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    this.generateBooks();
+  }
+
+  formSubmitBook() {
+    const bookFormTitle = document.getElementById("bookFormTitle");
+    const bookFormAuthor = document.getElementById("bookFormAuthor");
+    const bookFormYear = document.getElementById("bookFormYear");
+    const bookFormIsComplete = document.getElementById("bookFormIsComplete");
+
+    if (bookFormTitle.value && bookFormAuthor.value && bookFormYear.value) {
+      const book = {
+        id: new Date().getTime(),
+        title: bookFormTitle.value,
+        author: bookFormAuthor.value,
+        year: parseInt(bookFormYear.value),
+        isCompleted: bookFormIsComplete.checked,
+      };
+      this.saveBook(book);
+    }
   }
 }

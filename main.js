@@ -15,8 +15,7 @@ document.addEventListener("click", (event) => {
   if (event.target.matches('[data-testid="bookFormSubmitButton"]')) {
     //TODO ADDING BOOK SITE
     event.preventDefault();
-    const bookData = Book.getBook();
-    BookClass.saveBook(bookData);
+    BookClass.formSubmitBook();
   } else if (event.target.matches('[data-testid="bookItemDeleteButton"]')) {
     //TODO DELETE BOOK SITE
     console.log(bookId);
@@ -25,10 +24,12 @@ document.addEventListener("click", (event) => {
     //TODO MOVE BOOK SITE
     BookClass.moveBook(bookId);
   } else if (event.target.matches('[data-testid="bookItemEditButton"]')) {
-    ModalHandlingClass.modalBookData(event);
-    //modalSubmitListener(myModal, bookId); //UPDATE the latest title
+    ModalHandlingClass.showModal(event);
+  } else if (event.target.matches("#searchSubmit")) {
+    event.preventDefault();
+    const title = event.target.parentElement.searchBookTitle.value;
+    BookClass.findBook(title);
   }
-  BookClass.generateBooks();
 });
 
 //LEARNING CUSTOM EVENT BY LISTEN WHEN BOOK IS BEING ADDED
