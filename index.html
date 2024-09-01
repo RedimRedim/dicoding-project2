@@ -5,12 +5,12 @@
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bookshelf App</title>
-  
+
 
   <!-- Quicksand-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
@@ -44,7 +44,7 @@
           <input id="bookFormIsComplete" type="checkbox" data-testid="bookFormIsCompleteCheckbox" />
         </div>
         <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
-          Masukkan Buku ke rak 
+          Masukkan Buku ke rak
         </button>
       </form>
     </section>
@@ -61,28 +61,31 @@
       </form>
     </section>
 
-    <section>
-      <p class="sectionTitle">Pending Read</p>
 
-      <div id="incompleteBookList" data-testid="incompleteBookList">
-        <!-- 
+    <div class="book-container">
+      <section>
+        <p class="sectionTitle">Pending Read</p>
+
+        <div id="incompleteBookList" data-testid="incompleteBookList">
+          <!-- 
             Ini adalah struktur HTML untuk masing-masing buku.
             Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
           -->
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <section>
-      <p class="sectionTitle">Selesai dibaca</p>
+      <section>
+        <p class="sectionTitle">Selesai dibaca</p>
 
-      <div id="completeBookList" data-testid="completeBookList">
-        <!-- 
+        <div id="completeBookList" data-testid="completeBookList">
+          <!-- 
             Ini adalah struktur HTML untuk masing-masing buku.
             Pastikan susunan elemen beserta atribut data-testid menyesuaikan seperti contoh ini.
           -->
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   </main>
 
   <!-- Modal for handling Edit Book -->
@@ -104,18 +107,18 @@
           <input type="number" id="changeYear" placeholder="Enter new publication year" autocomplete="off" required>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true" >
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true">
             <label class="form-check-label" for="flexRadioDefault1">
-                Sudah dibaca
+              Sudah dibaca
             </label>
-        </div>
-        <div class="form-check">
+          </div>
+          <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="false">
             <label class="form-check-label" for="flexRadioDefault2">
-                Belum dibaca
+              Belum dibaca
             </label>
-        </div>
-        
+          </div>
+
 
         </div>
         <div class="modal-footer">

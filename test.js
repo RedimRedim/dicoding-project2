@@ -43,13 +43,13 @@ export class Book {
       let completedBooks = [];
       let pendingBooks = [];
       allBooks.forEach((book) => {
-        let divBook = `<div data-bookid="${book.id}" data-testid="bookItem" id="bookItemContent">
+        let divBook = `<div data-bookid="${book.id}" data-testid="bookItem" class="itemContent">
                   <p data-testid="bookItemTitle">${book.title}
                   </p>
                   
                  <p data-testid="bookItemAuthor">${book.author}</p>
                  <p data-testid="bookItemYear">${book.year}</p>
-                 <div>
+                 <div class="buttonContent">
                     <button data-testid="bookItemIsCompleteButton">${
                       book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
                     }</button>
