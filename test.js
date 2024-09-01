@@ -43,17 +43,21 @@ export class Book {
       let completedBooks = [];
       let pendingBooks = [];
       allBooks.forEach((book) => {
-        let divBook = `<div data-bookid="${book.id}" data-testid="bookItem" class="itemContent">
+        let divBook = `<div data-bookid="${
+          book.id
+        }" data-testid="bookItem" class="itemContent">
+        <div class="itemDetails">
                   <p data-testid="bookItemTitle">${book.title}
                   </p>
                   
                  <p data-testid="bookItemAuthor">${book.author}</p>
                  <p data-testid="bookItemYear">${book.year}</p>
+        </div>                 
                  <div class="buttonContent">
-                    <button data-testid="bookItemIsCompleteButton">${
+                    <button id="${book.isCompleted ? 'pendingBtn' : 'completedBtn'}" data-testid="bookItemIsCompleteButton">${
                       book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
                     }</button>
-                   <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+                   <button data-testid="bookItemDeleteButton" id="delBtn">Hapus Buku</button>
                    <button data-testid="bookItemEditButton">Edit Buku</button>
                  </div>
                </div>`;
@@ -140,6 +144,7 @@ export class Book {
         isCompleted: bookFormIsComplete.checked,
       };
       this.saveBook(book);
+      this.generateBooks();
     }
   }
 }
