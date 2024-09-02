@@ -1,15 +1,14 @@
-import { STORAGE_KEY, parseStorageKey } from "./key.js";
+import { STORAGE_KEY, parseStorageKey } from "./modalclass.js";
 
 export class Book {
   constructor() {
-    this.books = parseStorageKey() || []; //getData from local storage
+    this.books = parseStorageKey();
   }
 
   saveBook(bookData) {
     console.log(bookData);
     if (bookData) {
       let booksArray = [];
-
       if (
         localStorage.getItem(STORAGE_KEY) == null ||
         localStorage.getItem(STORAGE_KEY) == undefined
@@ -37,8 +36,8 @@ export class Book {
   }
 
   generateBooks(filteredBooks) {
-    const allBooks = filteredBooks ? filteredBooks : parseStorageKey();
-
+    const allBooks = filteredBooks ? filteredBooks : this.books;
+    console.log(allBooks);
     if (allBooks) {
       let completedBooks = [];
       let pendingBooks = [];
@@ -54,9 +53,11 @@ export class Book {
                  <p data-testid="bookItemYear">${book.year}</p>
         </div>                 
                  <div class="buttonContent">
-                    <button id="${book.isCompleted ? 'pendingBtn' : 'completedBtn'}" data-testid="bookItemIsCompleteButton">${
-                      book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
-                    }</button>
+                    <button id="${
+                      book.isCompleted ? "pendingBtn" : "completedBtn"
+                    }" data-testid="bookItemIsCompleteButton">${
+          book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
+        }</button>
                    <button data-testid="bookItemDeleteButton" id="delBtn">Hapus Buku</button>
                    <button data-testid="bookItemEditButton">Edit Buku</button>
                  </div>

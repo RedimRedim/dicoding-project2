@@ -51,7 +51,7 @@
     </section>
 
     <section>
-      <p class="sectionTitle">Find Book</p>
+      <p class="sectionTitle">Find Book </p>
 
       <form id="searchBook" data-testid="searchBookForm">
         <label for="searchBookTitle">Judul</label>
@@ -65,7 +65,7 @@
 
     <div class="book-container">
       <section>
-        <p class="sectionTitle">Pending Read</p>
+        <p class="sectionTitle">Pending Read &times;</p>
 
         <div id="incompleteBookList" data-testid="incompleteBookList">
           <!-- 
@@ -76,7 +76,7 @@
       </section>
 
       <section>
-        <p class="sectionTitle">Selesai dibaca</p>
+        <p class="sectionTitle">Selesai dibaca &check;</p>
 
         <div id="completeBookList" data-testid="completeBookList">
           <!-- 
@@ -90,22 +90,28 @@
   </main>
 
   <!-- Modal for handling Edit Book -->
-  <div class="modal" tabindex="-1" id="myModal">
+  <div class="modal " tabindex="-1" id="myModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content bg-dark text-light">
         <div class="modal-header">
           <h5 class="modal-title">Edit Book Name: <span class="modal-bookid"></span></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <label for>Title</label>
-          <input type="text" id="changeTitle" placeholder="Enter new title name" autocomplete="off" required>
-          <br>
-          <label for>Author</label>
-          <input type="text" id="changeAuthor" placeholder="Enter new author name" autocomplete="off" required>
-          <br>
-          <label for>Year</label>
-          <input type="number" id="changeYear" placeholder="Enter new publication year" autocomplete="off" required>
+          <div class="form-group">
+            <label for>Title</label>
+            <input type="text" id="changeTitle" placeholder="Enter new title name" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for>Author</label>
+            <input type="text" id="changeAuthor" placeholder="Enter new author name" autocomplete="off" required>
+          </div>
+
+          <div class="form-group">
+            <label for>Year</label>
+            <input type="number" id="changeYear" placeholder="Enter new publication year" autocomplete="off" required>
+          </div>
 
           <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="true">
@@ -123,8 +129,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn" data-dismiss="modal">Close</button>
-          <button type="button" class="btn" id="saveBook">Save changes</button>
+          <button type="button" class="btn bg-dark text-light" data-dismiss="modal">Close</button>
+          <button type="button" id="saveBook">Save changes</button>
         </div>
       </div>
     </div>
@@ -134,10 +140,9 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <script type="module" src="key.js"></script>
-  <script type="module" src="test.js"> </script>
-  <script type="module" src="main.js"></script>
+  <script type="module" src="../scripts/modalclass.js"> </script>
+  <script type="module" src="../scripts/bookclass.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 
 </html>

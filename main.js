@@ -1,5 +1,5 @@
-import { STORAGE_KEY, parseStorageKey, ModalHandling } from "./key.js";
-import { Book } from "./test.js";
+import { ModalHandling, STORAGE_KEY } from "./scripts/modalclass.js";
+import { Book } from "./scripts/bookclass.js";
 const BookClass = new Book();
 const ModalHandlingClass = new ModalHandling();
 
@@ -14,7 +14,6 @@ document.addEventListener("click", (event) => {
   );
   if (event.target.matches('[data-testid="bookFormSubmitButton"]')) {
     //TODO ADDING BOOK SITE
-    event.preventDefault();
     BookClass.formSubmitBook();
   } else if (event.target.matches('[data-testid="bookItemDeleteButton"]')) {
     //TODO DELETE BOOK SITE
