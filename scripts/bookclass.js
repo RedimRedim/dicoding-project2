@@ -1,4 +1,4 @@
-import { STORAGE_KEY, parseStorageKey } from "./modalclass.js";
+import { STORAGE_KEY, parseStorageKey, sampleData } from "./modalclass.js";
 
 export class Book {
   constructor() {
@@ -9,8 +9,15 @@ export class Book {
     this.books = parseStorageKey();
   }
 
+  addDummyData() {
+    this.books = [...this.books, ...sampleData];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    this.generateBooks();
+  }
+
   saveBook(bookData) {
     if (bookData) {
+      console.log(bookData);
       this.refreshBooks(); // Ensure books are up-to-date
       this.books.push(bookData);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
@@ -87,11 +94,14 @@ export class Book {
   }
 
   deleteBook(bookId) {
-    this.refreshBooks();
-    this.books = this.books.filter((book) => {
-      return book.id != bookId;
-    });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    try {
+      this.books = this.books.filter((book) => {
+        return book.id != bookId;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
+    } catch (error) {
+      this.books = [];
+    }
     this.generateBooks();
   }
 

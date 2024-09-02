@@ -4,6 +4,7 @@ const BookClass = new Book();
 const ModalHandlingClass = new ModalHandling();
 
 document.addEventListener("DOMContentLoaded", () => {
+  dummyData();
   BookClass.generateBooks();
 });
 
@@ -12,8 +13,10 @@ document.addEventListener("click", (event) => {
   const bookId = parseInt(
     event.target.parentElement.parentElement.dataset.bookid
   );
+
   if (event.target.matches('[data-testid="bookFormSubmitButton"]')) {
     //TODO ADDING BOOK SITE
+    event.preventDefault();
     BookClass.formSubmitBook();
   } else if (event.target.matches('[data-testid="bookItemDeleteButton"]')) {
     //TODO DELETE BOOK SITE
@@ -40,3 +43,21 @@ document.addEventListener("bookAdded", (event) => {
     Year: ${event.detail.year}
     Completed: ${event.detail.isCompleted}`);
 });
+
+function dummyData() {
+  const storageKey = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (storageKey == 0 || storageKey == null) {
+    document.querySelector(".dummyData").innerHTML =
+      'there is no data as per now <button type="submit" id="addDummyData">addDummyData</button>';
+  } else {
+    document.querySelector(".dummyData").innerHTML = "";
+  }
+  try {
+    document.getElementById("addDummyData").addEventListener("click", () => {
+      BookClass.addDummyData();
+      document.querySelector(".dummyData").innerHTML = "";
+    });
+  } catch (error) {
+    console.log("error");
+  }
+}

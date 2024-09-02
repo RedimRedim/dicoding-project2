@@ -220,4 +220,12 @@
       flex-grow: 1;
       padding:0;
     }
+
+    .dummyData{
+      padding: 0.5em;
+    }
+    
+    #addDummyData{
+      padding: 0.5em;
+    }
 }
