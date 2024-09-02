@@ -5,21 +5,15 @@ export class Book {
     this.books = parseStorageKey();
   }
 
+  refreshBooks() {
+    this.books = parseStorageKey();
+  }
+
   saveBook(bookData) {
     if (bookData) {
-      let booksArray = [];
-      if (
-        localStorage.getItem(STORAGE_KEY) == null ||
-        localStorage.getItem(STORAGE_KEY) == undefined
-      ) {
-        // Create storage if not yet existing
-        booksArray = [];
-      } else {
-        booksArray = this.books;
-      }
-
-      booksArray.push(bookData);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(booksArray));
+      this.refreshBooks(); // Ensure books are up-to-date
+      this.books.push(bookData);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.books));
 
       const bookAddedEvent = new CustomEvent("bookAdded", {
         detail: {
@@ -35,6 +29,7 @@ export class Book {
   }
 
   generateBooks(filteredBooks) {
+    this.refreshBooks(); // Ensure books are up-to-date
     const allBooks = filteredBooks ? filteredBooks : this.books;
     console.log(allBooks);
     if (allBooks) {
@@ -92,6 +87,7 @@ export class Book {
   }
 
   deleteBook(bookId) {
+    this.refreshBooks();
     this.books = this.books.filter((book) => {
       return book.id != bookId;
     });
@@ -100,6 +96,7 @@ export class Book {
   }
 
   moveBook(bookId) {
+    this.refreshBooks();
     this.books = this.books.map((book) => {
       if (book.id == bookId) {
         return { ...book, isCompleted: !book.isCompleted }; //this one we wanna return book while reverse the isCompleted property
@@ -111,6 +108,7 @@ export class Book {
   }
 
   updateBook(updateBookData) {
+    this.refreshBooks();
     this.books = this.books.map((book) => {
       if (book.id == updateBookData.id) {
         console.log(updateBookData);
