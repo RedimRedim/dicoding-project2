@@ -6,7 +6,6 @@ export class Book {
   }
 
   saveBook(bookData) {
-    console.log(bookData);
     if (bookData) {
       let booksArray = [];
       if (

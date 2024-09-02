@@ -146,6 +146,7 @@ export function parseStorageKey() {
   if (storedBooks && storedBooks.length > 0) {
     return storedBooks;
   } else {
+    console.log("PROBLEM");
     return localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleData));
   }
 }
