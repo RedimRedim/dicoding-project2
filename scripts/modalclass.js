@@ -5,140 +5,140 @@ export const sampleData = [
     title: "1984",
     author: "George Orwell",
     year: 1949,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "002",
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     year: 1960,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "003",
     title: "The Great Gatsby",
     author: "F. Scott Fitzgerald",
     year: 1925,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "004",
     title: "Moby Dick",
     author: "Herman Melville",
     year: 1851,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "005",
     title: "Pride and Prejudice",
     author: "Jane Austen",
     year: 1813,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "006",
     title: "War and Peace",
     author: "Leo Tolstoy",
     year: 1869,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "007",
     title: "The Catcher in the Rye",
     author: "J.D. Salinger",
     year: 1951,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "008",
     title: "Brave New World",
     author: "Aldous Huxley",
     year: 1932,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "009",
     title: "The Hobbit",
     author: "J.R.R. Tolkien",
     year: 1937,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "010",
     title: "Fahrenheit 451",
     author: "Ray Bradbury",
     year: 1953,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "011",
     title: "The Picture of Dorian Gray",
     author: "Oscar Wilde",
     year: 1890,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "012",
     title: "The Grapes of Wrath",
     author: "John Steinbeck",
     year: 1932,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "013",
     title: "Jane Eyre",
     author: "Charlotte Brontë",
     year: 1847,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "014",
     title: "The Brothers Karamazov",
     author: "Fyodor Dostoevsky",
     year: 1880,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "015",
     title: "Wuthering Heights",
     author: "Emily Brontë",
     year: 1847,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "016",
     title: "The Odyssey",
     author: "Homer",
     year: 1932,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "017",
     title: "The Alchemist",
     author: "Paulo Coelho",
     year: 1988,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "018",
     title: "The Road",
     author: "Cormac McCarthy",
     year: 2006,
-    isCompleted: true,
+    isComplete: true,
   },
   {
     id: "019",
     title: "The Fault in Our Stars",
     author: "John Green",
     year: 2012,
-    isCompleted: false,
+    isComplete: false,
   },
   {
     id: "020",
     title: "The Chronicles of Narnia",
     author: "C.S. Lewis",
     year: 1950,
-    isCompleted: true,
+    isComplete: true,
   },
 ];
 export function parseStorageKey() {
@@ -172,7 +172,7 @@ export class ModalHandling extends Book {
         .querySelector('[data-testid="bookItemAuthor"]')
         .textContent.trim(),
       year: bookItem.querySelector('[data-testid="bookItemYear"]').textContent,
-      isCompleted: bookItem
+      isComplete: bookItem
         .querySelector('[data-testid="bookItemIsCompleteButton"]')
         .textContent.toLowerCase()
         .includes("belum")
@@ -195,7 +195,7 @@ export class ModalHandling extends Book {
       'input[name="flexRadioDefault"][value="false"]'
     );
 
-    if (bookData.isCompleted) {
+    if (bookData.isComplete) {
       trueModalElement.checked = true;
       falseModalElement.checked = false;
     } else {
@@ -221,7 +221,7 @@ export class ModalHandling extends Book {
       title: document.getElementById("changeTitle").value,
       author: document.getElementById("changeAuthor").value,
       year: parseInt(document.getElementById("changeYear").value),
-      isCompleted:
+      isComplete:
         document.querySelector('input[name="flexRadioDefault"]:checked')
           .value === "true",
     };

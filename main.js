@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //CRUD CLICK HANDLING
 document.addEventListener("click", (event) => {
-  const bookId = parseInt(
-    event.target.parentElement.parentElement.dataset.bookid
-  );
+  const bookElement = event.target.closest("[data-bookid]"); // Get closest ancestor with data-bookid
+  const bookId = bookElement ? parseInt(bookElement.dataset.bookid) || 0 : 0;
 
   if (event.target.matches('[data-testid="bookFormSubmitButton"]')) {
     //TODO ADDING BOOK SITE
@@ -41,7 +40,7 @@ document.addEventListener("bookAdded", (event) => {
     Title: ${event.detail.title}
     Author: ${event.detail.author}
     Year: ${event.detail.year}
-    Completed: ${event.detail.isCompleted}`);
+    Completed: ${event.detail.isComplete}`);
 });
 
 function dummyData() {

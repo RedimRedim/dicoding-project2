@@ -28,7 +28,7 @@ export class Book {
           title: bookData.title,
           author: bookData.author,
           year: bookData.year,
-          isCompleted: bookData.isCompleted,
+          isComplete: bookData.isComplete,
         },
       });
       document.dispatchEvent(bookAddedEvent);
@@ -55,15 +55,15 @@ export class Book {
         </div>                 
                  <div class="buttonContent">
                     <button id="${
-                      book.isCompleted ? "pendingBtn" : "completedBtn"
+                      book.isComplete ? "pendingBtn" : "completedBtn"
                     }" data-testid="bookItemIsCompleteButton">${
-          book.isCompleted ? "Belum dibaca" : "Selesai dibaca"
+          book.isComplete ? "Belum dibaca" : "Selesai dibaca"
         }</button>
                    <button data-testid="bookItemDeleteButton" id="delBtn">Hapus Buku</button>
                    <button data-testid="bookItemEditButton">Edit Buku</button>
                  </div>
                </div>`;
-        if (book.isCompleted) {
+        if (book.isComplete) {
           completedBooks.push(divBook);
         } else {
           pendingBooks.push(divBook);
@@ -109,7 +109,7 @@ export class Book {
     this.refreshBooks();
     this.books = this.books.map((book) => {
       if (book.id == bookId) {
-        return { ...book, isCompleted: !book.isCompleted }; //this one we wanna return book while reverse the isCompleted property
+        return { ...book, isComplete: !book.isComplete }; //this one we wanna return book while reverse the isComplete property
       }
       return book;
     });
@@ -128,7 +128,7 @@ export class Book {
           title: updateBookData.title,
           author: updateBookData.author,
           year: updateBookData.year,
-          isCompleted: updateBookData.isCompleted,
+          isComplete: updateBookData.isComplete,
         };
       }
       return book;
@@ -149,7 +149,7 @@ export class Book {
         title: bookFormTitle.value,
         author: bookFormAuthor.value,
         year: parseInt(bookFormYear.value),
-        isCompleted: bookFormIsComplete.checked,
+        isComplete: bookFormIsComplete.checked,
       };
       this.saveBook(book);
       this.generateBooks();
